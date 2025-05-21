@@ -22,6 +22,7 @@ from mutagen.oggopus import OggOpus
 # External endpoints
 SRT_ENDPOINT = os.getenv("SRT_ENDPOINT", "http://localhost:8001/inference")
 LLM_ENDPOINT = os.getenv("LLM_ENDPOINT", "http://localhost:8002/v1/chat/completions")
+LLM_MODEL_NAME = os.getenv("LLM_MODEL_NAME", "phi")
 TTS_ENDPOINT = os.getenv("TTS_ENDPOINT", "http://localhost:8003/tts")
 
 logging.basicConfig(level=logging.DEBUG)
@@ -250,7 +251,7 @@ async def generate_llm_response(websocket, session_id, text):
         
         async with aiohttp.ClientSession() as session:
             async with session.post(LLM_ENDPOINT, json={
-                "model": "gpt-3.5-turbo",
+                "model": LLM_MODEL_NAME,
                 "messages": conversation + [{"role": "user", "content": text}],
                 "stream": True
             }) as response:

@@ -3,7 +3,7 @@
 time curl http://localhost:8002/v1/chat/completions \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gpt-3.5-turbo",
+    "model": "phi",
     "messages": [
       {
         "role": "system",
